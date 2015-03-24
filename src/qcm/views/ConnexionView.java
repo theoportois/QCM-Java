@@ -13,7 +13,7 @@ import qcm.controllers.ConnexionController;
 
 public class ConnexionView {
 
-	protected Shell shell;
+	protected Shell shlConnexion;
 	private Text textMail;
 	public Text getTextMail() {
 		return textMail;
@@ -48,9 +48,9 @@ public class ConnexionView {
 	 */
 	public void open() {
 		Display display = Display.getDefault();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlConnexion.open();
+		shlConnexion.layout();
+		while (!shlConnexion.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -63,32 +63,33 @@ public class ConnexionView {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
-		shell.setLayout(null);
+		shlConnexion = new Shell();
+		shlConnexion.setSize(375, 215);
+		shlConnexion.setText("Connexion");
+		shlConnexion.setLayout(null);
 		
-		btnConnexion = new Button(shell, SWT.NONE);
+		btnConnexion = new Button(shlConnexion, SWT.NONE);
 		
-		btnConnexion.setBounds(175, 121, 75, 25);
+		btnConnexion.setBounds(246, 108, 75, 25);
 		btnConnexion.setText("Connexion");
 		
-		textMail = new Text(shell, SWT.BORDER);
+		textMail = new Text(shlConnexion, SWT.BORDER);
 		textMail.setBounds(106, 54, 215, 21);
 		
-		Label lblMail = new Label(shell, SWT.NONE);
+		Label lblMail = new Label(shlConnexion, SWT.NONE);
 		lblMail.setAlignment(SWT.RIGHT);
 		lblMail.setBounds(45, 60, 55, 15);
 		lblMail.setText("Mail :");
 		
-		Label lblPassword = new Label(shell, SWT.NONE);
+		Label lblPassword = new Label(shlConnexion, SWT.NONE);
 		lblPassword.setText("Password :");
 		lblPassword.setAlignment(SWT.RIGHT);
 		lblPassword.setBounds(25, 87, 75, 15);
 		
-		textPassword = new Text(shell, SWT.BORDER);
+		textPassword = new Text(shlConnexion, SWT.BORDER);
 		textPassword.setBounds(106, 81, 215, 21);
 
 	}

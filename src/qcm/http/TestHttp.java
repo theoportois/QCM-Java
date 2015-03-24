@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -14,11 +15,15 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import qcm.models.Domaine;
 import qcm.models.User;
@@ -32,22 +37,32 @@ import com.google.gson.reflect.TypeToken;
 public class TestHttp {
 	private Gson gson;
 	private HttpClient httpClient;
+	private HttpContext httpContext;
+	private CookieStore cookieStore;
 	private String baseUrl="http://127.0.0.1/rest-qcm/";
 
+	protected void createCookieStore() {
+	    httpClient = HttpClients.createDefault();
+	    cookieStore = new BasicCookieStore();
+	    httpContext = new BasicHttpContext();
+	    httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
+	}	
+	
 	public String getBaseUrl() {
 		return baseUrl;
 	}
 
 	public TestHttp(){
 		httpClient=HttpClients.createDefault();
+		createCookieStore();
 		gson=new GsonBuilder().create();
 	}
 	
-	public String get(String url) throws ClientProtocolException, IOException{
+	public String get(String url, String token) throws ClientProtocolException, IOException{
 		String result="";
-		HttpGet getRequest = new HttpGet(url);
+		HttpGet getRequest = new HttpGet(url+"?token="+token);
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
-        result = httpClient.execute(getRequest, responseHandler);
+        result = httpClient.execute(getRequest, responseHandler,httpContext);
 		return result;
 	}
 	
@@ -55,7 +70,7 @@ public class TestHttp {
 		String result="";
 		HttpDelete deleteRequest = new HttpDelete(url);
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
-        result = httpClient.execute(deleteRequest, responseHandler);
+        result = httpClient.execute(deleteRequest, responseHandler,httpContext);
 		return result;
 	}
 	
@@ -66,7 +81,7 @@ public class TestHttp {
         String jsonStr=gson.toJson(object);
         StringEntity entity=new StringEntity(jsonStr, "utf-8");
         postRequest.setEntity(entity);
-        result=httpClient.execute(postRequest, responseHandler);
+        result=httpClient.execute(postRequest, responseHandler,httpContext);
 		return result;
 	}
 	
@@ -87,7 +102,7 @@ public class TestHttp {
 	        }
 	        postRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	        ResponseHandler<String> responseHandler = new BasicResponseHandler();
-	        result = httpClient.execute(postRequest, responseHandler);
+	        result = httpClient.execute(postRequest, responseHandler,httpContext);
 	    } finally {
 	        httpClient.close();
 	    }
@@ -101,7 +116,7 @@ public class TestHttp {
         String jsonStr=gson.toJson(object);
         StringEntity entity=new StringEntity(jsonStr, "utf-8");
         putRequest.setEntity(entity);
-        result=httpClient.execute(putRequest, responseHandler);
+        result=httpClient.execute(putRequest, responseHandler,httpContext);
 		return result;
 	}
 	
