@@ -36,7 +36,6 @@ public class ConnexionController {
 				try {
 					String connectResponse=http.postJSON(http.getBaseUrl()+"user/connect", user);
 					Connexion connect =gson.jsonToConnect(connectResponse);
-					System.out.println(connect.getToken());
 					
 					if (connect.getToken()!=null){
 						System.out.println("ouvrir");
