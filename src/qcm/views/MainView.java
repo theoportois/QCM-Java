@@ -32,12 +32,18 @@ import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class MainView {
 
 	protected Shell shlQcmjava;
-	private Text text;
-
+	private Table table_1;
+	private Table table;
+	private Button btnTest;
+	
+	
+	
 	/**
 	 * Launch the application.
 	 * @param args
@@ -51,12 +57,17 @@ public class MainView {
 //		}
 //	}
 
+
+
+	public Button getBtnTest() {
+		return btnTest;
+	}
+
 	/**
 	 * Open the window.
 	 */
 	public void open() {
 		Display display = Display.getDefault();
-		createContents();
 		shlQcmjava.open();
 		shlQcmjava.layout();
 		while (!shlQcmjava.isDisposed()) {
@@ -90,6 +101,28 @@ public class MainView {
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmNewItem.setControl(composite_1);
 		
+		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setBounds(107, 96, 293, 161);
+		table.setBackgroundMode(0);
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnNom = tableViewerColumn.getColumn();
+		tblclmnNom.setWidth(100);
+		tblclmnNom.setText("Nom");
+		
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnDomaine = tableViewerColumn_1.getColumn();
+		tblclmnDomaine.setWidth(100);
+		tblclmnDomaine.setText("Domaine");
+		
+		btnTest = new Button(composite_1, SWT.NONE);
+		btnTest.setBounds(120, 324, 75, 25);
+		btnTest.setText("Test");
+		
+		
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("New Item");
 		
@@ -97,8 +130,13 @@ public class MainView {
 		tabItem.setControl(composite);
 		composite.setLayout(null);
 		
-		text = new Text(composite, SWT.BORDER);
-		text.setBounds(111, 65, 76, 21);
+		Button btnNewButton = new Button(composite, SWT.NONE);
+		btnNewButton.setBounds(134, 119, 75, 25);
+		btnNewButton.setText("New Button");
+		
+		TableViewer tableViewer_1 = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		table_1 = tableViewer_1.getTable();
+		table_1.setBounds(124, 202, 85, 85);
 		
 		
 	}

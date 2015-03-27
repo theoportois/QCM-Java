@@ -59,7 +59,6 @@ public class ConnexionController {
 				//on test si c'est les bonnes id
 				if(connect.getToken()!=null){
 					//JOptionPane.showMessageDialog(null, "Vous êtes désormais connecté.");
-
 					view.close();
 					MainController controller=new MainController(new MainView());
 					controller.init();
