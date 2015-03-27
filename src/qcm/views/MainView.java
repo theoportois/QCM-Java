@@ -14,10 +14,29 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import qcm.controllers.MainController;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.custom.CBanner;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnPixelData;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.jface.text.TextViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.layout.TreeColumnLayout;
+import org.eclipse.swt.widgets.Group;
 
 public class MainView {
 
-	protected Shell shell;
+	protected Shell shlQcmjava;
+	private Text text;
 
 	/**
 	 * Launch the application.
@@ -38,7 +57,9 @@ public class MainView {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		while (!shell.isDisposed()) {
+		shlQcmjava.open();
+		shlQcmjava.layout();
+		while (!shlQcmjava.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -54,19 +75,31 @@ public class MainView {
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
-		shell = new Shell();
+		shlQcmjava = new Shell();
+		shlQcmjava.setText("QCM-Java\r\n");
+		shlQcmjava.setMinimumSize(new Point(50, 50));
+		shlQcmjava.setSize(691, 607);
+		shlQcmjava.setLayout(null);
 		
-		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
-		tabFolder.setBounds(0, 0, 616, 443);
+		TabFolder tabFolder = new TabFolder(shlQcmjava, SWT.NONE);
+		tabFolder.setBounds(0, 0, 447, 446);
 		
 		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
 		tbtmNewItem.setText("New Item");
 		
-		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setText("New Item");
+		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
+		tbtmNewItem.setControl(composite_1);
 		
-		TabItem tbtmNewItem_2 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_2.setText("New Item");
+		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+		tabItem.setText("New Item");
+		
+		Composite composite = new Composite(tabFolder, SWT.NONE);
+		tabItem.setControl(composite);
+		composite.setLayout(null);
+		
+		text = new Text(composite, SWT.BORDER);
+		text.setBounds(111, 65, 76, 21);
+		
 		
 	}
 }

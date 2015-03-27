@@ -1,6 +1,5 @@
 package qcm.controllers;
 
-import qcm.views.ConnexionView;
 import qcm.views.MainView;
 
 public class MainController {
@@ -14,8 +13,6 @@ public class MainController {
 	
 	public void init(){
 		view.init();	
-		
-		
 		
 		view.open();
 	}

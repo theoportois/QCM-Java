@@ -57,6 +57,12 @@ public class ConnexionView {
 		}
 	}
 	
+	public void close(){
+		Display display = Display.getDefault();
+		display.close();
+		
+	}
+	
 	public void init(){
 		this.createContents();
 	}
@@ -77,6 +83,7 @@ public class ConnexionView {
 		btnConnexion.setText("Connexion");
 		
 		textMail = new Text(shlConnexion, SWT.BORDER);
+		textMail.setText("ooo");
 		textMail.setBounds(106, 54, 215, 21);
 		
 		Label lblMail = new Label(shlConnexion, SWT.NONE);
@@ -90,6 +97,7 @@ public class ConnexionView {
 		lblPassword.setBounds(25, 87, 75, 15);
 		
 		textPassword = new Text(shlConnexion, SWT.BORDER);
+		textPassword.setText("aaa");
 		textPassword.setBounds(106, 81, 215, 21);
 
 	}

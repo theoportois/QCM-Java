@@ -2,6 +2,8 @@ package qcm.controllers;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import org.apache.http.client.ClientProtocolException;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -44,19 +46,8 @@ public class ConnexionController {
 				try {
 					String connectResponse=http.postJSON(http.getBaseUrl()+"user/connect", user);
 					connect =gson.jsonToConnect(connectResponse);
-					
-					
 					String domaines=http.get(http.getBaseUrl()+"domaines", connect.getToken());
-					System.out.println("yo");
-					System.out.println(domaines);
-					System.out.println("beeee");
-					if(connect.getToken()!=null){
-						MainController controller=new MainController(new MainView());
-						controller.init();
-						System.out.println("okok");
-					}else{
-						System.out.println("nope");
-					}
+					
 					
 
 				} catch (ClientProtocolException e1) {
@@ -64,7 +55,18 @@ public class ConnexionController {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+				System.out.println(connect.getToken());
+				//on test si c'est les bonnes id
+				if(connect.getToken()!=null){
+					//JOptionPane.showMessageDialog(null, "Vous êtes désormais connecté.");
+
+					view.close();
+					MainController controller=new MainController(new MainView());
+					controller.init();
+					
+				}else{
+					System.out.println("nope");
+				} 
 				
 				
 				
