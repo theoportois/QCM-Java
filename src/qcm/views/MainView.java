@@ -103,7 +103,7 @@ public class MainView {
 		
 		TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
-		table.setBounds(107, 96, 293, 161);
+		table.setBounds(29, 54, 339, 222);
 		table.setBackgroundMode(0);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);

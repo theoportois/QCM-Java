@@ -45,6 +45,7 @@ public class ConnexionController {
 				user.setPassword(view.getTextPassword().getText());
 				try {
 					String connectResponse=http.postJSON(http.getBaseUrl()+"user/connect", user);
+					System.out.println(connectResponse);
 					connect =gson.jsonToConnect(connectResponse);
 					String domaines=http.get(http.getBaseUrl()+"domaines", connect.getToken());
 					
